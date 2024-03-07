@@ -1,9 +1,6 @@
 FROM composer:2.7.1 AS composer
 
 FROM php:8.3-fpm-alpine3.17 AS base
-RUN apk add --no-cache bash \
-  && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
-  && apk add --no-cache symfony-cli
 
 RUN apk add --no-cache \
     autoconf \
@@ -35,9 +32,13 @@ WORKDIR /app
 
 FROM base AS dev
 
-COPY php/conf.d-dev/* /usr/local/etc/php/conf.d/
+RUN apk add --no-cache bash \
+  && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
+  && apk add --no-cache symfony-cli
 
 RUN apk add --no-cache gcc g++ make autoconf linux-headers \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
     && apk del --no-network gcc g++ make autoconf linux-headers
+
+COPY config/dev/* /usr/local/etc/php/conf.d/
