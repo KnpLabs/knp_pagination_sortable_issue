@@ -1,0 +1,25 @@
+services:
+  php:
+    build:
+      context: .
+      target: base
+    volumes:
+      - ./app:/app
+    ports:
+      - 8000:8000
+    entrypoint: [symfony, serve, --allow-http]
+
+  composer:
+    profiles: [cli]
+    extends: php
+    entrypoint: composer
+
+  symfony:
+    profiles: [cli]
+    extends: php
+    entrypoint: symfony
+
+  console:
+    profiles: [cli]
+    extends: php
+    entrypoint: console
