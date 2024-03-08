@@ -25,8 +25,8 @@ tasks:
 
   symfony:
     desc: Run Symfony command
-    cmd: docker compose --profile cli run --rm composer {{.CLI_ARGS}}
+    cmd: docker compose --profile cli run --rm symfony {{.CLI_ARGS}}
 
   console:
     desc: Run console command
-    cmd: docker compose --profile cli run --rm composer {{.CLI_ARGS}}
+    cmd: docker compose --profile cli run --rm console {{.CLI_ARGS}}

@@ -3,11 +3,24 @@ services:
     build:
       context: .
       target: dev
+    env_file: app/.env
     volumes:
       - ./app:/app
     ports:
       - 8000:8000
     entrypoint: [symfony, serve, --allow-http]
+
+  database:
+    image: mysql:${MYSQL_VERSION:-8.3.0}
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+      MYSQL_USER: ${MYSQL_USER:-app}
+    volumes:
+      - /var/lib/mysql
+    ports:
+      - 3306:3306
 
   composer:
     profiles: [cli]
