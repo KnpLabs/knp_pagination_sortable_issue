@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,13 +20,9 @@ final class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
-    public function add(Movie $movie): void
+    public function getQueryBuilder(): QueryBuilder
     {
-        $this->entityManager->persist($movie);
-    }
-
-    public function flush(): void
-    {
-        $this->entityManager->flush();
+        $reflected = new \ReflectionClass(Movie::class);
+        return $this->createQueryBuilder($reflected->getShortName());
     }
 }

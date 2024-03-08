@@ -2,13 +2,23 @@
 
 {% block body %}
 	<main class="container p-4 d-flex flex-wrap">
-		{% for movie in movies %}
-			<div class="card m-2" style="width: 18rem;">
-				<div class="card-body">
-					<h5 class="card-title">{{ movie.title }}</h5>
-					<p class="card-text">{{ movie.price|number_format(2, ',', ' ') }}</p>
-				</div>
-			</div>
-		{% endfor %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Title</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for movie in movies %}
+					<tr>
+						<th scope="row">{{ movie.id }}</th>
+						<td>{{ movie.title }}</td>
+						<td>{{ (movie.price/100)|number_format(2, ',', ' ') }}€</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</main>
 {% endblock %}

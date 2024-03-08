@@ -6,6 +6,7 @@ tasks:
       - task: pull
       - task: build
       - task: start
+      - task: migrations
 
   pull:
     desc: Pull Docker images from registry
@@ -18,6 +19,12 @@ tasks:
   start:
     desc: Create and start containers detached
     cmd: docker compose up -d
+
+  migrations:
+    desc: Run migrations
+    cmds:
+      - task console -- doctrine:database:create --if-not-exists
+      - task console -- doctrine:migrations:migrate --no-interaction
 
   composer:
     desc: Run Composer command
