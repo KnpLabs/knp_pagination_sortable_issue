@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<main class="container p-4 d-flex flex-wrap">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{{ knp_pagination_sortable(pagination, '#', 'movie.id') }}</th>
+					<th>{{ knp_pagination_sortable(pagination, 'Title', 'movie.title') }}</th>
+					<th>{{ knp_pagination_sortable(pagination, 'Price', 'movie.price') }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for movie in pagination %}
+					<tr>
+						<th scope="row">{{ movie.id }}</th>
+						<td>{{ movie.title }}</td>
+						<td>{{ (movie.price/100)|number_format(2, ',', ' ') }}€</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="navigation">
+			{{ knp_pagination_render(pagination) }}
+		</div>
+	</main>
+{% endblock %}
