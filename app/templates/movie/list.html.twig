@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<main class="container p-4 d-flex flex-wrap">
+		{% for movie in movies %}
+			<div class="card m-2" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">{{ movie.title }}</h5>
+					<p class="card-text">{{ movie.price|number_format(2, ',', ' ') }}</p>
+				</div>
+			</div>
+		{% endfor %}
+	</main>
+{% endblock %}
