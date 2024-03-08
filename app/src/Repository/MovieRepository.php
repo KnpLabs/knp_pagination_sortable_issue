@@ -22,7 +22,6 @@ final class MovieRepository extends ServiceEntityRepository
 
     public function getQueryBuilder(): QueryBuilder
     {
-        $reflected = new \ReflectionClass(Movie::class);
-        return $this->createQueryBuilder($reflected->getShortName());
+        return $this->createQueryBuilder('movie');
     }
 }

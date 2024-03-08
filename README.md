@@ -27,3 +27,9 @@ The following commands supports arguments:
 - symfony:  Run Symfony command
 
 You can pass arguments by adding `-- ...args`. Example: `task composer -- require symfony/symfony`
+
+## KnpBundlePaginator error
+
+After bootstraping the project (with command `task` in the terminal), navigate to [localhost:8000/movie/add](http://localhost:8000/movie/add) and create at least 3 movies.
+
+Then navigate to [localhost:8000/movie/list](http://localhost:8000/movie/list) and try clicking a table header to sort the rows. It should throw an exception.

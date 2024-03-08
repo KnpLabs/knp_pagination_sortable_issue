@@ -5,13 +5,13 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>Title</th>
-					<th>Price</th>
+					<th>{{ knp_pagination_sortable(pagination, '#', 'movie.id') }}</th>
+					<th>{{ knp_pagination_sortable(pagination, 'Title', 'movie.title') }}</th>
+					<th>{{ knp_pagination_sortable(pagination, 'Price', 'movie.price') }}</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for movie in movies %}
+				{% for movie in pagination %}
 					<tr>
 						<th scope="row">{{ movie.id }}</th>
 						<td>{{ movie.title }}</td>
@@ -20,5 +20,8 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<div class="navigation">
+			{{ knp_pagination_render(pagination) }}
+		</div>
 	</main>
 {% endblock %}

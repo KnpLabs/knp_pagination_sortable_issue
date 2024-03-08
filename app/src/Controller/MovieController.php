@@ -6,8 +6,8 @@ namespace App\Controller;
 
 use App\Collection\Movies;
 use App\Entity\Movie;
+use App\Form\Movie\AddMovieType;
 use Doctrine\ORM\EntityManagerInterface;
-use Form\Movie\AddMovieType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,10 +43,10 @@ class MovieController extends AbstractController
     }
 
     #[Route('/', 'list', methods: Request::METHOD_GET)]
-    public function list(): Response
+    public function list(Request $request): Response
     {
-        $movies = $this->movies->all();
+        $pagination = $this->movies->all((int) $request->query->get('page', 1));
 
-        return $this->render('movie/list.html.twig', [ 'movies' => $movies ]);
+        return $this->render('movie/list.html.twig', [ 'pagination' => $pagination ]);
     }
 }
